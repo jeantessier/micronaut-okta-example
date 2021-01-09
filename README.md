@@ -1,12 +1,9 @@
-## Feature security-jwt documentation
+# Micronaut Okta Example
 
-- [Micronaut Micronaut Security JWT documentation](https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html)
+Based on
+[this article](https://dzone.com/articles/spring-vs-micronaut-vs-quarkus-which-one-is-the-be)
+on integrating Okta with various microservices frameworks, including Micronaut.
 
-## Feature security documentation
+To run:
 
-- [Micronaut Micronaut Security documentation](https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html)
-
-## Feature http-client documentation
-
-- [Micronaut Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
-
+    $ ./gradlew run
