@@ -2,10 +2,11 @@ micronaut:
   application:
     name: micronautOktaExample
   security:
-    authentication: bearer
+    enabled: true
     token:
       jwt:
+        enabled: true
         signatures:
-          secret:
-            generator:
-              secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}"'
+          jwks:
+            okta:
+              url: https://dev-2345032.okta.com/oauth2/default/v1/keys
