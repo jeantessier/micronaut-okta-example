@@ -9,7 +9,6 @@ group = "micronaut.okta.example"
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 micronaut {
@@ -40,6 +39,3 @@ java {
     sourceCompatibility = JavaVersion.toVersion("1.8")
     targetCompatibility = JavaVersion.toVersion("1.8")
 }
-
-
-
