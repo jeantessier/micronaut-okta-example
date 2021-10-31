@@ -3,4 +3,4 @@ defaultPackage: micronaut.okta.example
 testFramework: spock
 sourceLanguage: groovy
 buildTool: gradle
-features: [app-name, gradle, groovy, groovy-application, http-client, logback, netty-server, readme, security, security-annotations, security-jwt, shade, spock, yaml]
+features: [annotation-api, app-name, gradle, groovy, groovy-application, http-client, logback, netty-server, readme, security, security-annotations, security-jwt, shade, spock, yaml]
