@@ -10,3 +10,7 @@ micronaut:
           jwks:
             okta:
               url: https://dev-2345032.okta.com/oauth2/default/v1/keys
+netty:
+  default:
+    allocator:
+      max-order: 3
