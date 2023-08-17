@@ -1,7 +1,8 @@
 plugins {
-    id("groovy")
-    id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.7.9"
+    id("groovy") 
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.micronaut.application") version "4.0.2"
+    id("io.micronaut.aot") version "4.0.2"
 }
 
 version = "0.1"
@@ -11,23 +12,15 @@ repositories {
     mavenCentral()
 }
 
-micronaut {
-    runtime("netty")
-    testRuntime("spock2")
-    processing {
-        incremental(true)
-        annotations("micronaut.okta.example.*")
-    }
-}
-
 dependencies {
-    implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut.groovy:micronaut-runtime-groovy")
     implementation("io.micronaut.security:micronaut-security-jwt")
-    implementation("jakarta.annotation:jakarta.annotation-api")
-    compileOnly("io.micronaut:micronaut-http-validation")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
     compileOnly("io.micronaut.security:micronaut-security-annotations")
+    compileOnly("io.micronaut.serde:micronaut-serde-processor")
     runtimeOnly("ch.qos.logback:logback-classic")
+    testImplementation("io.micronaut:micronaut-http-client")
+    aotPlugins("io.micronaut.security:micronaut-security-aot:4.0.1")
 }
 
 
@@ -35,6 +28,28 @@ application {
     mainClass.set("micronaut.okta.example.Application")
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("11")
-    targetCompatibility = JavaVersion.toVersion("11")
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("netty")
+    testRuntime("spock2")
+    processing {
+        incremental(true)
+        annotations("micronaut.okta.example.*")
+    }
+    aot {
+    // Please review carefully the optimizations enabled below
+    // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+        optimizeServiceLoading = false
+        convertYamlToJava = false
+        precomputeOperations = true
+        cacheEnvironment = true
+        optimizeClassLoading = true
+        deduceEnvironment = true
+        optimizeNetty = true
+        configurationProperties.put("micronaut.security.jwks.enabled","false")
+    }
 }
